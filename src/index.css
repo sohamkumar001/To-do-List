@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Press Start 2P', cursive;
+  --color-manga-red: #ff3e3e;
+  --color-manga-blue: #5d5dff;
+  --color-manga-bg: #e0e0e0;
+}
+
+@layer base {
+  * {
+    @apply select-none box-border m-0 p-0;
+  }
+
+  body {
+    @apply bg-manga-bg text-black font-sans text-[10px] min-h-screen flex flex-col;
+    background-image: radial-gradient(black 1px, transparent 0);
+    background-size: 15px 15px;
+    background-attachment: fixed;
+    image-rendering: pixelated;
+  }
+}
+
+@layer components {
+  .window {
+    @apply bg-white border-[6px] border-black h-fit shadow-[12px_12px_0px_#000];
+  }
+
+  .win-header {
+    @apply bg-black text-white p-[10px] text-[10px] flex justify-between items-center;
+  }
+
+  .win-content {
+    @apply p-5;
+  }
+
+  .btn-pixel {
+    @apply font-[inherit] p-3 border-[4px] border-black cursor-pointer shadow-[6px_6px_0px_#000] bg-white transition-all active:shadow-none active:translate-x-[6px] active:translate-y-[6px] disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none disabled:translate-x-[6px] disabled:translate-y-[6px];
+  }
+
+  .btn-blue { @apply bg-manga-blue text-white w-full; }
+  .btn-red { @apply bg-manga-red text-white w-full; }
+  .btn-green { @apply bg-[#2ecc71] text-white w-full; }
+
+  .input-pixel {
+    @apply font-[inherit] p-3 border-[4px] border-black w-full mb-[10px] bg-white select-text text-[10px];
+  }
+
+  .progress-bar {
+    @apply h-6 border-[4px] border-black mb-5 bg-[#eee] relative overflow-hidden;
+  }
+}
+
+@keyframes idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+@keyframes cheer {
+  0%, 100% { 
+    transform: translateY(0) scale(1); 
+    background-color: var(--color-manga-blue); 
+  }
+  50% { 
+    transform: translateY(-15px) scale(1.2); 
+    background-color: var(--color-manga-red); 
+  }
+}
+
+.anim-idle { animation: idle 1s infinite steps(4, jump-end); }
+.anim-cheer { animation: cheer 0.3s infinite steps(4, jump-end); }
